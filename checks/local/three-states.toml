@@ -1,0 +1,50 @@
+# Invented values for a fictional venture: a test fixture, not data about any real company.
+# A value is PROVISIONAL until [measured] names it with the source that measured it.
+
+[model]
+start_cash = 10000        # cash at registration
+horizon_months = 48
+launch_month = 12         # planned: the first sale is a year after registration
+price = 40                # per unit
+unit_cost = 22            # variable cost per unit
+units_at_launch = 100     # units sold in the launch month
+unit_growth = 0.08        # monthly growth of units after launch
+capacity = 5000           # units per month the production partner can supply
+scale_units = 600         # the event that moves the venture to scale: units per month
+
+[[cost]]
+name = "accountant"
+kind = "monthly"
+event = "registration"
+amount = 150
+
+[[cost]]
+name = "prototype tooling"
+kind = "once"
+event = "launch"
+amount = 12000
+
+[[cost]]
+name = "web hosting"
+kind = "monthly"
+event = "launch"
+amount = 200
+
+[[cost]]
+name = "part-time operator"
+kind = "monthly"
+event = "scale"
+amount = 2500
+
+[[scenario]]
+name = "low"
+change = "launch_month"
+value = 18
+
+[[scenario]]
+name = "high"
+change = "unit_growth"
+value = 0.12
+
+[measured]
+# key = "source that measured it"; empty on purpose in the fixture
