@@ -7,8 +7,9 @@ read its [standard.md](https://github.com/Tewf/reader-ergonomics/blob/2e5b6f0c3e
 
 1. Read the standard at the release this repository checks against (v1.21.0), and the front page's scope: what is in,
    what is out, and which neighbour holds what is out.
-2. The first job is the review on the front page, in its five steps, staged outside this repository until it names its
-   baseline; it is finished when it can. The repository may be renamed at the frame step.
+2. The first review is written ([evidence/finance-runway](evidence/finance-runway/)) and names the baseline B1. A new
+   review is staged outside this repository until it names its baseline. Whether to rename the repository is the
+   maintainer's, after the frame step.
 3. A fact that belongs to a neighbour is linked, never copied. A choice that shapes the repository gets a record in
    [decisions/](decisions/).
 
@@ -41,6 +42,7 @@ the checks both skip:
 rm -rf checks/out/standard && mkdir -p checks/out/standard
 git -C ../reader-ergonomics archive 2e5b6f0 | tar -x -C checks/out/standard   # the commit checks.yml pins
 python3 checks/out/standard/checks/run.py . --tiers program,meaning --judge flag   # the repository, as CI runs it
+python3 -m unittest discover -s checks   # the tests of checks/local/runway.py
 ```
 
 - Fix every error. Read every warning.

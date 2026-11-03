@@ -7,9 +7,10 @@ Cash, **runway**, break-even and scenarios for a small venture, the economics of
 
 This page in French: [README.fr.md](README.fr.md).
 
-> **Status (2026-11-04):** set up; nothing is written yet beyond the scope. The first job is a literature review, not
-> started. The name is provisional until that review's first step says what the field calls this. It is not an
-> official standard, not a peer-reviewed study and not a new result.
+> **Status (2026-11-04):** the first review is written, 32 sources, and ends on the baseline B1. The program
+> `checks/local/runway.py` runs on a fixture of invented values. The name is kept for now; the review's frame says the
+> field's own name is entrepreneurial finance. It is not an official standard, not a peer-reviewed study and not a new
+> result.
 >
 > **How it is made:** with Claude, an AI assistant by Anthropic, under the maintainer's direction, the way
 > reader-ergonomics was made. Corrections are welcome as issues.
@@ -63,21 +64,47 @@ digraph where_it_sits {
 | later | tax and accounting rules by country | they change with the place and the legal form, and the first pass stays general |
 | out | unit economics and the parts of a model | [business-model](https://github.com/Tewf/business-model) |
 
-## The first job: a literature review
+## What the review found
 
-Not started. It follows the order of a thesis review, and it is finished when it can name the baseline.
+The review is in [evidence/finance-runway](evidence/finance-runway/), a first pass of 32 sources. Every figure is read
+in an abstract or a summary and marked (secondary) there. Terms such as gross burn, the three-state plan and
+"nothing is paid before its event" are defined in the [frame](evidence/finance-runway/frame.md).
 
-1. **Frame:** the problem in one sentence, and what each field calls it. Leads to verify: corporate finance texts written for small firms, venture financing literature, the measured returns of public grants and of accelerators, and runway as practitioners define it (grey). The repository may be renamed then.
-2. **Review:** each name, searched by its academic name, its acronym and its author; surveys first.
-   - runway, burn and break-even as finance texts define them, and where practitioners use the words differently;
-   - the choice between equity, grants, debt and bootstrapping, from financing theory and from measured outcomes;
-   - studies of grants and accelerators that estimate an effect, with their designs read in the source;
-   - reference programs for a cash forecast, found under the authors' names before one is written.
-3. **State of the art, and the case against.**
-4. **Position:** what this repository asks that the field does not already answer.
-5. **Baseline:** a program for runway and break-even from a model's numbers, run on a plan in three states and compared with a spreadsheet forecast as the practice.
+- **Runway is a practitioners' word.** No formal source defining it was found; burn is defined by an investor's guide and
+  break-even by managerial accounting texts.
+- **Cash that ends is the usual last cause, not the first.** Of 385 failed venture-backed companies with an identified
+  reason, 70% cited running out of capital, which the producer calls the final cause.
+- **Grants and accelerators have mixed measured effects.** An SBIR award roughly doubles the chance of later venture
+  capital. Fifty-two evaluations of R&D subsidies show no substantial additionality. Accelerator schooling helped;
+  services alone did not.
+- **Forecasts are optimistic, and an average hides the range.** Three scenarios, each moving one named number, are the
+  minimum the evidence supports.
 
-## Questions the review must answer
+## The baseline
+
+**B1 is the spreadsheet runway:** cash over the month-0 gross burn, with every cost running from the start and one
+scenario. It is the practice of the field, written down in [baseline](evidence/finance-runway/baseline.md). The program
+is compared with it: on the fixture, B1 gives 66.7 months and the event-driven model gives 12.
+
+## The program
+
+`checks/local/runway.py` reads a small toml of a model's numbers and prints:
+
+- runway, event-driven and by the spreadsheet rule;
+- break-even: the first month with operating cash flow at or above zero, and the units per month that cover costs;
+- the three states (before launch, at launch, at scale) and the event that opens each;
+- one line per scenario, each naming the one number it changes;
+- faults found from the numbers alone, such as a cost with no event or cash ending before an event;
+- every value not named as measured, tagged PROVISIONAL.
+
+```sh
+python3 checks/local/runway.py checks/local/three-states.toml
+python3 -m unittest discover -s checks
+```
+
+The fixture holds invented values for a fictional venture; it is not data about any real company.
+
+## Questions the review answers
 
 - **Runway.** How long does cash last when first revenue arrives long after registration, and which costs can wait for their event?
 - **Funding.** What does each source of funding cost a small venture, and what do measured returns say of grants and accelerators?
@@ -100,6 +127,8 @@ master also renders the site, [tewf.github.io/business-finance](https://tewf.git
 
 | Part | Summary |
 |---|---|
+| [evidence](evidence/) | the review: 32 sources, five steps, ending on the baseline B1 |
+| [checks/local](checks/local/) | `runway.py`, the program, and its fixture of invented values; tests in `checks/test_runway.py` |
 | [decisions](decisions/) | one record per choice that shapes this repository, each opening with the decision in one sentence |
 
 ## Licence

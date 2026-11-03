@@ -1,12 +1,15 @@
 # Finance and runway
 
-> Cash, runway, break-even and scenarios for a small venture, the economics of funding (equity, grants, debt, bootstrapping), and a program for runway and break-even from a model's numbers. Scope only.
+> Cash, runway, break-even and scenarios for a small venture, the economics of funding (equity, grants, debt, bootstrapping), and a program for runway and break-even from a model's numbers. The first review is written and a program computes both.
 
 Each page's markdown source is served at the same path with a .md extension. This index is written by hand; AGENTS.md says to keep it in step.
 
 ## The repository
 
 - [Finance and runway](https://tewf.github.io/business-finance/README.md): the scope, the first job and the questions its review must answer
+- [Evidence](https://tewf.github.io/business-finance/evidence/README.md): the review, 32 sources, ending on the baseline B1, and the bibliography
+- [Runway and break-even review](https://tewf.github.io/business-finance/evidence/finance-runway/README.md): frame, protocol, sources, findings, state of the art, position, against, baseline
+- [Program](https://github.com/Tewf/business-finance/blob/master/checks/local/runway.py): runway, break-even and the three states from a toml of a model's numbers
 - [Decisions](https://tewf.github.io/business-finance/decisions/README.md): one record per choice that shapes the repository
 
 ## Contributing

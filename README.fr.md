@@ -7,9 +7,10 @@ La trésorerie, l'**autonomie de trésorerie**, le seuil de rentabilité et les 
 
 Cette page en anglais : [README.md](README.md). Les deux versions suivent le même état.
 
-> **État (2026-11-04) :** mis en place ; rien n'est encore écrit au-delà du périmètre. Le premier travail est une revue
-> de littérature, non commencée. Le nom est provisoire jusqu'à ce que la première étape de cette revue dise comment le
-> domaine nomme la chose. Ce n'est ni une norme officielle, ni une étude relue par des pairs, ni un résultat nouveau.
+> **État (2026-11-04) :** la première revue est écrite, 32 sources, et se termine sur la référence B1. Le programme
+> `checks/local/runway.py` tourne sur un jeu d'essai de valeurs inventées. Le nom est gardé pour l'instant ; le cadrage
+> de la revue dit que le domaine nomme la chose finance entrepreneuriale. Ce n'est ni une norme officielle, ni une
+> étude relue par des pairs, ni un résultat nouveau.
 >
 > **Comment il est fait :** avec Claude, un assistant IA d'Anthropic, sous la direction du mainteneur, comme
 > reader-ergonomics. Les corrections sont bienvenues sous forme d'issues.
@@ -63,21 +64,48 @@ digraph where_it_sits {
 | plus tard | les règles fiscales et comptables par pays | elles changent avec le lieu et la forme juridique, et la première passe reste générale |
 | dehors | l'économie unitaire et les parties d'un modèle | [business-model](https://github.com/Tewf/business-model) |
 
-## Le premier travail : une revue de littérature
+## Ce que la revue a trouvé
 
-Non commencée. Elle suit l'ordre d'une revue de thèse, et elle est finie quand elle peut nommer la référence.
+La revue est dans [evidence/finance-runway](evidence/finance-runway/), une première passe de 32 sources. Chaque chiffre y
+est lu dans un résumé et marqué (secondary) ; la revue est en anglais. Les termes (consommation brute, plan en trois
+événements, « rien n'est payé avant son événement ») sont définis dans le [cadrage](evidence/finance-runway/frame.md).
 
-1. **Cadrer :** le problème en une phrase, et comment chaque domaine le nomme. Pistes à vérifier : les manuels de finance d'entreprise écrits pour les petites firmes. La littérature du financement des jeunes entreprises. Les rendements mesurés des subventions publiques et des accélérateurs. L'autonomie de trésorerie telle que la définissent les praticiens (grise). Le dépôt peut être renommé alors.
-2. **Revue :** chaque nom, cherché par son nom académique, son acronyme et son auteur ; les synthèses d'abord.
-   - l'autonomie, la consommation de trésorerie et le seuil de rentabilité tels que les définissent les textes de finance, et où les praticiens emploient les mots autrement ;
-   - le choix entre capital, subventions, dette et autofinancement, d'après la théorie du financement et des résultats mesurés ;
-   - les études de subventions et d'accélérateurs qui estiment un effet, leurs plans lus dans la source ;
-   - des programmes de référence pour une prévision de trésorerie, trouvés sous le nom de leurs auteurs avant d'en écrire un.
-3. **État de l'art, et le dossier contre.**
-4. **Positionnement :** ce que ce dépôt demande et que le domaine ne répond pas déjà.
-5. **Référence :** un programme d'autonomie et de seuil de rentabilité à partir des nombres d'un modèle, exécuté sur un plan en trois états et comparé à une prévision de tableur, qui est la pratique.
+- **L'autonomie de trésorerie est un mot de praticiens.** Aucune source formelle ne la définit. La consommation est
+  définie par le guide d'un investisseur. Le seuil de rentabilité l'est par les manuels de comptabilité de gestion.
+- **L'argent qui manque est la dernière cause, non la première.** Sur 385 entreprises financées par du capital-risque
+  et disparues, dont la raison est connue, 70 % citent l'épuisement du capital. Le producteur l'appelle la cause finale.
+- **Subventions et accélérateurs ont des effets mesurés mitigés.** Une aide SBIR double à peu près la chance d'un
+  capital-risque ultérieur. Cinquante-deux évaluations de subventions à la R&D ne montrent pas d'additionnalité
+  substantielle. La formation des accélérateurs a aidé ; les services seuls non.
+- **Les prévisions sont optimistes, et une moyenne cache la fourchette.** Trois scénarios, chacun déplaçant un nombre
+  nommé, sont le minimum que les données soutiennent.
 
-## Questions auxquelles la revue doit répondre
+## La référence
+
+**B1 est l'autonomie de tableur :** la trésorerie divisée par la consommation brute du mois 0, chaque coût courant
+depuis le début, un seul scénario. C'est la pratique du domaine, écrite dans
+[baseline](evidence/finance-runway/baseline.md). Le programme lui est comparé : sur le jeu d'essai, B1 donne 66,7 mois et
+le modèle par événements en donne 12.
+
+## Le programme
+
+`checks/local/runway.py` lit un petit fichier toml des nombres d'un modèle et affiche :
+
+- l'autonomie, par événements et par la règle du tableur ;
+- le seuil de rentabilité : le premier mois où le flux d'exploitation est au moins nul, et les unités par mois qui couvrent les coûts ;
+- les trois états (avant le lancement, au lancement, à l'échelle) et l'événement qui ouvre chacun ;
+- une ligne par scénario, chacun nommant le seul nombre qu'il change ;
+- les défauts trouvés à partir des seuls nombres, comme un coût sans événement ou une trésorerie qui finit avant un événement ;
+- chaque valeur non déclarée mesurée, étiquetée PROVISIONAL.
+
+```sh
+python3 checks/local/runway.py checks/local/three-states.toml
+python3 -m unittest discover -s checks
+```
+
+Le jeu d'essai contient des valeurs inventées pour une entreprise fictive ; ce ne sont pas des données d'une entreprise réelle.
+
+## Questions auxquelles la revue répond
 
 - **Autonomie.** Combien de temps la trésorerie dure-t-elle quand le premier revenu arrive longtemps après l'immatriculation, et quels coûts peuvent attendre leur événement ?
 - **Financement.** Que coûte chaque source de financement à une petite entreprise, et que disent les rendements mesurés des subventions et des accélérateurs ?
@@ -100,6 +128,8 @@ master construit aussi le site, [tewf.github.io/business-finance](https://tewf.g
 
 | Partie | Résumé |
 |---|---|
+| [evidence](evidence/) | la revue : 32 sources, cinq étapes, terminée sur la référence B1 |
+| [checks/local](checks/local/) | `runway.py`, le programme, et son jeu d'essai de valeurs inventées ; tests dans `checks/test_runway.py` |
 | [decisions](decisions/) | une fiche par choix qui façonne ce dépôt, chacune ouvrant sur la décision en une phrase |
 
 ## Licence
