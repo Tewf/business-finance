@@ -67,3 +67,24 @@ path = "evidence/finance-runway/state-of-the-art.md"
 question = "the name 'state' and the opening are far apart in meaning (0.03): does the name predict the content?"
 file = "8995b6d8a074"
 answer = "Yes: the shape of a review names step 3 `state-of-the-art`, and the file gives the records of the field for each question."
+
+[[answer]]
+check = "co-change"
+path = "AGENTS.md"
+question = "changed together with decisions/README.md in 3 commits (100% of the rarer one's), from another folder: should they share a folder, or should one link to the other?"
+file = "e8212074582f"
+answer = "They stay apart: `AGENTS.md` and `decisions/README.md` share no fact. Both hold a link to the standard at its pinned commit, so every pin move rewrites both in one commit; the standard-pin and standard-links checks keep those copies equal, so the coupling is the pin's, not the files'."
+
+[[answer]]
+check = "co-change"
+path = "README.fr.md"
+question = "changed together with decisions/README.md in 3 commits (100% of the rarer one's), from another folder: should they share a folder, or should one link to the other?"
+file = "e69066dc4864"
+answer = "They stay apart: `README.fr.md` and `decisions/README.md` share no fact. Both hold a link to the standard at its pinned commit, so every pin move rewrites both in one commit; the standard-pin and standard-links checks keep those copies equal, so the coupling is the pin's, not the files'."
+
+[[answer]]
+check = "co-change"
+path = "README.md"
+question = "changed together with decisions/README.md in 3 commits (100% of the rarer one's), from another folder: should they share a folder, or should one link to the other?"
+file = "edd554c8333b"
+answer = "They stay apart: `README.md` and `decisions/README.md` share no fact. Both hold a link to the standard at its pinned commit, so every pin move rewrites both in one commit; the standard-pin and standard-links checks keep those copies equal, so the coupling is the pin's, not the files'."
