@@ -2,7 +2,7 @@
 
 **Decision:** The baseline for a runway and break-even model is the spreadsheet rule of practice, and the program in `checks/local/runway.py` is compared with it on a plan in three states.
 
-**Status:** accepted, 2026-11-04. **Shape:** [decision record](https://github.com/Tewf/reader-ergonomics/blob/2e5b6f0c3e67d2dc8195a63cf882d46170e79a5a/shapes/decision-record.md).
+**Status:** accepted, 2026-11-04. **Shape:** [decision record](https://github.com/Tewf/reader-ergonomics/blob/65e42472e2d4cbfd994c2a86e95a47e5dc7301ca/shapes/decision-record.md).
 
 ## Context
 

@@ -47,7 +47,7 @@ digraph where_it_sits {
 - **It reads the numbers of [business-model](https://github.com/Tewf/business-model)**: the model owns the unit economics, this repository owns what they do to cash over time.
 - **Its method is [ai-augmented-project](https://github.com/Tewf/ai-augmented-project)'s**: scope, review, baseline and plan, and the registers of decisions and of provisional values. It does not depend on that repository's other parts.
 - **It writes its review in the shapes of [reader-ergonomics-review](https://github.com/Tewf/reader-ergonomics-review)**, the review as a genre; the shapes are that repository's.
-- **It obeys [reader-ergonomics](https://github.com/Tewf/reader-ergonomics/blob/2e5b6f0c3e67d2dc8195a63cf882d46170e79a5a/standard.md)** (v1.21.0) and runs its checks in CI.
+- **It obeys [reader-ergonomics](https://github.com/Tewf/reader-ergonomics/blob/65e42472e2d4cbfd994c2a86e95a47e5dc7301ca/standard.md)** (v1.24.2) and runs its checks in CI.
 - **It links down only.** The family's map is [business](https://github.com/Tewf/business). A venture appears here as an example, never as the subject.
 
 ## Scope
